@@ -1,6 +1,7 @@
 #!/usr/bin/python3.6
 
 import smtplib, ssl
+from email import generator
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import json
@@ -39,11 +40,10 @@ def sendmail(Title="Emp Table modified", receiver_email="test.testmail99999@gmai
     # Add HTML/plain-text parts to MIMEMultipart message
     # The email client will try to render the last part first
     message.attach(part2)
-
-    # Create secure connection with server and send email
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-        server.login(sender_email, password)
-        server.sendmail(
-            sender_email, receiver_email, message.as_string()
-        )
+    outfile_name = r'C:\Downloads\email_sample.eml'
+    with open(outfile_name, 'w') as outfile:
+        gen = generator.Generator(outfile)
+        gen.flatten(msg)
+        
+        
+    
