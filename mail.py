@@ -1,17 +1,18 @@
 #!/usr/bin/python3.6
 
+#!/usr/bin/python3.6
+
 import smtplib, ssl
 from email import generator
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import json
 
-def sendmail(Title="Emp Table modified", receiver_email="test.testmail99999@gmail.com", msg="Test Message", Tmsg=" "):
+def sendmail(Title="Emp Table modified", receiver_email="test.testmail99999@gmail.com", msg="Test Message", Tmsg=" ", folder_save="." , file_name="samplefile.eml" ):
     """ This function can be used for sending the mail with message which is provided as the argument """
     with open("Mail_Config", "r") as file:
         MailDetails=json.load(file)
     sender_email = MailDetails["sender_email"]
-"""    receiver_email = MailDetails["receiver_email"]"""
     password = MailDetails["password"]
 
 
@@ -28,7 +29,6 @@ def sendmail(Title="Emp Table modified", receiver_email="test.testmail99999@gmai
             <br>
             {}<br><br>
             {}<br>
-
         </p>
       </body>
     </html>
@@ -40,10 +40,10 @@ def sendmail(Title="Emp Table modified", receiver_email="test.testmail99999@gmai
     # Add HTML/plain-text parts to MIMEMultipart message
     # The email client will try to render the last part first
     message.attach(part2)
-    outfile_name = r'C:\Downloads\email_sample.eml'
+    outfile_name = f"{folder_save}\{file_name}"
     with open(outfile_name, 'w') as outfile:
         gen = generator.Generator(outfile)
-        gen.flatten(msg)
+        gen.flatten(message)
         
         
     
