@@ -1,6 +1,7 @@
 {
 "sender_email" : "test.testmail99999@gmail.com",
-"Path_XL" : "<use full path of main excel file>",
-"password" : "Test@123"
-"DefaultSubject" : "< Add main default subject line > "
+"Path_XL" : "sample.xlsx",
+"password" : "Test@123",
+"DefaultSubject" : "TEst mail in json ",
+"folder_name" : "."
 }
